@@ -12,13 +12,13 @@ DB_NAME='backupdb'
 TABLE='log'
 
 
-LAST_BASE_BACKUP_TIME=$(find $BASEBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $1" "$2}')
-LAST_BASE_BACKUP_FILE_NAME=$(find $BASEBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $4}')
-LAST_BASE_BACKUP_FILE_SIZE=$(find $BASEBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $5}')
+LAST_BASE_BACKUP_TIME=$(find $BASEBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $1" "$2; exit}')
+LAST_BASE_BACKUP_FILE_NAME=$(find $BASEBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $4; exit}')
+LAST_BASE_BACKUP_FILE_SIZE=$(find $BASEBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $5; exit}')
 
-LAST_INCR_BACKUP_TIME=$(find $INCRBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $1" "$2}')
-LAST_INCR_BACKUP_FILE_NAME=$(find $INCRBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $4}')
-LAST_INCR_BACKUP_FILE_SIZE=$(find $INCRBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $5}')
+LAST_INCR_BACKUP_TIME=$(find $INCRBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $1" "$2; exit}')
+LAST_INCR_BACKUP_FILE_NAME=$(find $INCRBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $4; exit}')
+LAST_INCR_BACKUP_FILE_SIZE=$(find $INCRBACKDIR -type f -name "*.gz" -exec stat --format '%Y :%y %n %s' "{}" \; | sort -nr | cut -d: -f2- | head | awk '{print $5; exit}')
 
 
 echo "LAST_BASE_BACKUP_TIME $LAST_BASE_BACKUP_TIME"
