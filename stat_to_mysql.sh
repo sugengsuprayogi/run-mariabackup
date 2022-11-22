@@ -1,6 +1,7 @@
 #!/bin/sh
 
 PROJECT=LLLL
+IP=10.2
 BACKDIR=/hhhhhh
 BASEBACKDIR=$BACKDIR/base
 INCRBACKDIR=$BACKDIR/incr
@@ -32,11 +33,11 @@ echo "LAST_INCR_BACKUP_FILE_SIZE $LAST_INCR_BACKUP_FILE_SIZE"
 if [[ ! $LAST_INCR_BACKUP_TIME ]]
 then
 mysql -h $DB_HOST --user=$DB_USER --password=$DB_PASSWD $DB_NAME << EOF
-INSERT INTO $TABLE (project,last_base_backup_time,last_base_backup_file_name, last_base_backup_file_size) VALUES ("$PROJECT","$LAST_BASE_BACKUP_TIME","$LAST_BASE_BACKUP_FILE_NAME","$LAST_BASE_BACKUP_FILE_SIZE");
+INSERT INTO $TABLE (project, ip, last_base_backup_time,last_base_backup_file_name, last_base_backup_file_size) VALUES ("$PROJECT","$IP","$LAST_BASE_BACKUP_TIME","$LAST_BASE_BACKUP_FILE_NAME","$LAST_BASE_BACKUP_FILE_SIZE");
 EOF
 else
 mysql -h $DB_HOST --user=$DB_USER --password=$DB_PASSWD $DB_NAME << EOF
-INSERT INTO $TABLE (project,last_base_backup_time,last_base_backup_file_name, last_base_backup_file_size,last_incr_backup_time,last_incr_backup_file_name,last_incr_backup_file_size) VALUES ("$PROJECT","$LAST_BASE_BACKUP_TIME","$LAST_BASE_BACKUP_FILE_NAME","$LAST_BASE_BACKUP_FILE_SIZE","$LAST_INCR_BACKUP_TIME","$LAST_INCR_BACKUP_FILE_NAME","$LAST_INCR_BACKUP_FILE_SIZE");
+INSERT INTO $TABLE (project, ip, last_base_backup_time,last_base_backup_file_name, last_base_backup_file_size,last_incr_backup_time,last_incr_backup_file_name,last_incr_backup_file_size) VALUES ("$PROJECT","$IP","$LAST_BASE_BACKUP_TIME","$LAST_BASE_BACKUP_FILE_NAME","$LAST_BASE_BACKUP_FILE_SIZE","$LAST_INCR_BACKUP_TIME","$LAST_INCR_BACKUP_FILE_NAME","$LAST_INCR_BACKUP_FILE_SIZE");
 EOF
 fi
 
